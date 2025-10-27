@@ -1,0 +1,59 @@
+name: ai_bill
+description: "AI_Bill Application"
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.2.1
+  cupertino_icons: ^1.0.8
+
+  app_settings: ^5.1.1 # Device Setting Route
+
+  arc:
+    git: https://github.com/akthfdyd/arc.git
+
+
+  chat_gpt_sdk: ^3.1.0 # GPT SDK
+  image_picker: ^1.0.5 # 갤러리 접근
+
+  gap: ^3.0.1 # 간격 위젯
+
+  flutter_riverpod: ^2.4.9
+  riverpod_annotation: ^2.3.3
+
+  dio: ^5.0.3
+  json_annotation: ^4.9.0
+  freezed_annotation: ^2.4.4
+
+
+  uuid: ^4.0.0
+  flutter_dotenv: ^5.0.2 # dotnev
+
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  analyzer: "6.4.1"
+  flutter_lints: ^5.0.0
+  riverpod_lint: ^2.3.7
+  riverpod_generator: ^2.3.9
+  build_runner: ^2.4.13
+  json_serializable: ^6.8.0
+  freezed: ^2.5.2
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env
