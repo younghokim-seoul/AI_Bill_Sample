@@ -1,15 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
-
-import 'package:ai_bill/analysis/analysis_screen.dart';
-import 'package:ai_bill/data/dto/ocr_request_data.dart';
-import 'package:ai_bill/data/repository/ocr_repository.dart';
+import 'package:ai_bill/feature/analysis/analysis_screen.dart';
 import 'package:ai_bill/provider/picked_img.dart';
-import 'package:ai_bill/util/app_uuid.dart';
-import 'package:ai_bill/util/file_utils.dart';
 import 'package:arc/arc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ConfirmationScreen extends ConsumerWidget {
@@ -18,7 +10,6 @@ class ConfirmationScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final ocrRepository = ref.watch(ocrRepositoryProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.scaffoldBackgroundColor,
@@ -41,25 +32,24 @@ class ConfirmationScreen extends ConsumerWidget {
                   Expanded(
                     child: AspectRatio(
                       aspectRatio: 3 / 4,
-                      child: Builder(builder: (context) {
-                        final pickedImg = ref.watch(pickedImgProvider);
+                      child: Builder(
+                        builder: (context) {
+                          final pickedImg = ref.watch(pickedImgProvider);
 
-                        if (pickedImg == null) {
-                          return Center(
-                            child: Text(
-                              "이미지를 불러올 수 없습니다.",
-                              style: theme.textTheme.bodyLarge,
-                            ),
+                          if (pickedImg == null) {
+                            return Center(
+                              child: Text(
+                                "이미지를 불러올 수 없습니다.",
+                                style: theme.textTheme.bodyLarge,
+                              ),
+                            );
+                          }
+                          return ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0),
+                            child: Image.file(pickedImg, fit: BoxFit.contain),
                           );
-                        }
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(12.0),
-                          child: Image.file(
-                            pickedImg,
-                            fit: BoxFit.contain,
-                          ),
-                        );
-                      }),
+                        },
+                      ),
                     ),
                   ),
                   Padding(
@@ -83,20 +73,14 @@ class ConfirmationScreen extends ConsumerWidget {
         decoration: BoxDecoration(
           color: theme.scaffoldBackgroundColor,
           border: Border(
-            top: BorderSide(
-              color: const Color(0xFFE2E8F0),
-              width: 1,
-            ),
+            top: BorderSide(color: const Color(0xFFE2E8F0), width: 1),
           ),
         ),
         padding: EdgeInsets.fromLTRB(
           16,
           12,
           16,
-          12 + MediaQuery
-              .of(context)
-              .padding
-              .bottom,
+          12 + MediaQuery.of(context).padding.bottom,
         ),
         child: SizedBox(
           width: double.infinity,
@@ -115,40 +99,7 @@ class ConfirmationScreen extends ConsumerWidget {
             ),
             onPressed: () async {
               // TODO: OCR 분석 시작 로직 구현
-              final pickedImg = ref.read(pickedImgProvider);
-
-              if (pickedImg != null) {
-                // OCR 분석 로직 호출
-
-
-                final bytes = await pickedImg.readAsBytes();
-                final b64 = base64Encode(bytes);
-                String ext = extFromPath(pickedImg.path);
-
-                log("Picked image ext: $ext");
-                Arc.push(AnalysisScreen());
-
-              //   final request = OcrRequestData(version: OcrVersion.v2,
-              //       requestId: newRequestId(),
-              //       timestamp: timestamp,
-              //       images: images);
-              //
-              //   final reqForceKo = OCr(
-              //     version: OcrVersion.v2,
-              //     requestId: 'uuid-...',
-              //     timestamp: DateTime
-              //         .now()
-              //         .millisecondsSinceEpoch,
-              //     lang: Lang.ko,
-              //     // 명시적으로 ko
-              //     images: [
-              //       OcrImage(format: 'png', name: 'img1', data: 'BASE64...'),
-              //     ],
-              //   );
-              //
-              //
-              //   await ocrRepository.getOcrData(request)
-              }
+              Arc.push(AnalysisScreen());
             },
             child: const Text("OCR 고지서 분석"),
           ),

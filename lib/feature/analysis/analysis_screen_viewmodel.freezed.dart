@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AnalysisUiState {
   bool get isLoading => throw _privateConstructorUsedError;
+  GptResponse get response => throw _privateConstructorUsedError;
+  bool get isError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnalysisUiStateCopyWith<AnalysisUiState> get copyWith =>
@@ -29,7 +31,9 @@ abstract class $AnalysisUiStateCopyWith<$Res> {
           AnalysisUiState value, $Res Function(AnalysisUiState) then) =
       _$AnalysisUiStateCopyWithImpl<$Res, AnalysisUiState>;
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, GptResponse response, bool isError});
+
+  $GptResponseCopyWith<$Res> get response;
 }
 
 /// @nodoc
@@ -46,13 +50,31 @@ class _$AnalysisUiStateCopyWithImpl<$Res, $Val extends AnalysisUiState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? response = null,
+    Object? isError = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as GptResponse,
+      isError: null == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $GptResponseCopyWith<$Res> get response {
+    return $GptResponseCopyWith<$Res>(_value.response, (value) {
+      return _then(_value.copyWith(response: value) as $Val);
+    });
   }
 }
 
@@ -64,7 +86,10 @@ abstract class _$$AnalysisUiStateImplCopyWith<$Res>
       __$$AnalysisUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, GptResponse response, bool isError});
+
+  @override
+  $GptResponseCopyWith<$Res> get response;
 }
 
 /// @nodoc
@@ -79,11 +104,21 @@ class __$$AnalysisUiStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? response = null,
+    Object? isError = null,
   }) {
     return _then(_$AnalysisUiStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as GptResponse,
+      isError: null == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -92,14 +127,19 @@ class __$$AnalysisUiStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AnalysisUiStateImpl implements _AnalysisUiState {
-  _$AnalysisUiStateImpl({required this.isLoading});
+  _$AnalysisUiStateImpl(
+      {required this.isLoading, required this.response, required this.isError});
 
   @override
   final bool isLoading;
+  @override
+  final GptResponse response;
+  @override
+  final bool isError;
 
   @override
   String toString() {
-    return 'AnalysisUiState(isLoading: $isLoading)';
+    return 'AnalysisUiState(isLoading: $isLoading, response: $response, isError: $isError)';
   }
 
   @override
@@ -108,11 +148,14 @@ class _$AnalysisUiStateImpl implements _AnalysisUiState {
         (other.runtimeType == runtimeType &&
             other is _$AnalysisUiStateImpl &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.response, response) ||
+                other.response == response) &&
+            (identical(other.isError, isError) || other.isError == isError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
+  int get hashCode => Object.hash(runtimeType, isLoading, response, isError);
 
   @JsonKey(ignore: true)
   @override
@@ -123,11 +166,17 @@ class _$AnalysisUiStateImpl implements _AnalysisUiState {
 }
 
 abstract class _AnalysisUiState implements AnalysisUiState {
-  factory _AnalysisUiState({required final bool isLoading}) =
-      _$AnalysisUiStateImpl;
+  factory _AnalysisUiState(
+      {required final bool isLoading,
+      required final GptResponse response,
+      required final bool isError}) = _$AnalysisUiStateImpl;
 
   @override
   bool get isLoading;
+  @override
+  GptResponse get response;
+  @override
+  bool get isError;
   @override
   @JsonKey(ignore: true)
   _$$AnalysisUiStateImplCopyWith<_$AnalysisUiStateImpl> get copyWith =>

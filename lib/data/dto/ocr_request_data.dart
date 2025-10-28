@@ -20,16 +20,16 @@ enum Lang {
 }
 
 @freezed
-class OcrImage with _$OcrImage {
-  const factory OcrImage({
+class OcrReqImage with _$OcrReqImage {
+  const factory OcrReqImage({
     required String format,
     required String name,
     required String data,
 
-  }) = _OcrImage;
+  }) = _OcrReqImage;
 
-  factory OcrImage.fromJson(Map<String, dynamic> json) =>
-      _$OcrImageFromJson(json);
+  factory OcrReqImage.fromJson(Map<String, dynamic> json) =>
+      _$OcrReqImageFromJson(json);
 }
 
 @freezed
@@ -42,7 +42,7 @@ class OcrRequestData with _$OcrRequestData {
     /// lang은 선택값. 넣을 때는 Lang.ko만 사용.
     @JsonKey(includeIfNull: false) Lang? lang,
 
-    required List<OcrImage> images,
+    required List<OcrReqImage> images,
 
     @JsonKey(includeIfNull: false) bool? enableTableDetection,
   }) = _OcrRequestData;

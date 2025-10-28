@@ -6,14 +6,14 @@ part of 'ocr_request_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OcrImageImpl _$$OcrImageImplFromJson(Map<String, dynamic> json) =>
-    _$OcrImageImpl(
+_$OcrReqImageImpl _$$OcrReqImageImplFromJson(Map<String, dynamic> json) =>
+    _$OcrReqImageImpl(
       format: json['format'] as String,
       name: json['name'] as String,
       data: json['data'] as String,
     );
 
-Map<String, dynamic> _$$OcrImageImplToJson(_$OcrImageImpl instance) =>
+Map<String, dynamic> _$$OcrReqImageImplToJson(_$OcrReqImageImpl instance) =>
     <String, dynamic>{
       'format': instance.format,
       'name': instance.name,
@@ -27,7 +27,7 @@ _$OcrRequestDataImpl _$$OcrRequestDataImplFromJson(Map<String, dynamic> json) =>
       timestamp: (json['timestamp'] as num).toInt(),
       lang: $enumDecodeNullable(_$LangEnumMap, json['lang']),
       images: (json['images'] as List<dynamic>)
-          .map((e) => OcrImage.fromJson(e as Map<String, dynamic>))
+          .map((e) => OcrReqImage.fromJson(e as Map<String, dynamic>))
           .toList(),
       enableTableDetection: json['enableTableDetection'] as bool?,
     );

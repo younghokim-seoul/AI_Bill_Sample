@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:ai_bill/environment.dart';
-import 'package:ai_bill/home/home_screen.dart';
+import 'package:ai_bill/feature/home/home_screen.dart';
 import 'package:arc/arc.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
+import 'package:dart_openai/dart_openai.dart' as forWhisper;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,24 +21,28 @@ const Color textMutedDark = Color(0xFF94A3B8);
 final GlobalKey<NavigatorState> rootNavigatorKey = Arc().navigatorKey;
 
 void main() async {
+  await setup();
   runApp(const ProviderScope(child: MyApp()));
 }
 
 Future<void> setup() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dotenv.load(
-    fileName:  Environment.instance.dotFileName,
-  );
+  await dotenv.load(fileName: Environment.instance.dotFileName);
+
+  log("openApiKey => " + Environment.instance.openApiKey);
 
   OpenAI.instance.build(
     token: Environment.instance.openApiKey,
     baseOption: HttpSetup(
-        receiveTimeout: const Duration(seconds: 10),
-        connectTimeout: const Duration(seconds: 10)),
+      receiveTimeout: const Duration(seconds: 10),
+      connectTimeout: const Duration(seconds: 10),
+    ),
     enableLog: true,
   );
 
+  forWhisper.OpenAI.apiKey = Environment.instance.openApiKey;
+  forWhisper.OpenAI.requestsTimeOut = const Duration(seconds: 90);
 }
 
 class MyApp extends ConsumerWidget {

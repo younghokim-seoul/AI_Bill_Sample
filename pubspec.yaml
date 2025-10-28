@@ -36,6 +36,7 @@ dependencies:
 
   uuid: ^4.0.0
   flutter_dotenv: ^5.0.2 # dotnev
+  dart_openai: ^5.1.0
 
 
 
