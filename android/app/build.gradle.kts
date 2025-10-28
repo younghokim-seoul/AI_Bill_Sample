@@ -10,6 +10,16 @@ android {
     compileSdk = flutter.compileSdkVersion
 //    ndkVersion = flutter.ndkVersion
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../keystore/hansin.jks")
+            val pw = file("../keystore/keystore.password").readText().trim()
+            storePassword = pw
+            keyPassword = pw
+            keyAlias = "hansin-release"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -31,10 +41,18 @@ android {
     }
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true   
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        getByName("debug") {
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }
