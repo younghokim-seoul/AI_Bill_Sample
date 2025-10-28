@@ -7,6 +7,7 @@ import 'package:arc/arc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -93,19 +94,19 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            // ListTile(
-            //   leading: const Icon(
-            //     Icons.photo_camera_outlined,
-            //     color: primaryColor,
-            //   ),
-            //   title: const Text(
-            //     "사진 촬영",
-            //     style: TextStyle(fontWeight: FontWeight.w600),
-            //   ),
-            //   onTap: () {
-            //
-            //   },
-            // ),
+            ListTile(
+              leading: const Icon(
+                Icons.photo_camera_outlined,
+                color: primaryColor,
+              ),
+              title: const Text(
+                "사진 촬영",
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              onTap: () {
+                ref.read(pickedImgProvider.notifier).pickImageFile(ImageSource.camera);
+              },
+            ),
             ListTile(
               leading: const Icon(
                 Icons.photo_library_outlined,
@@ -116,7 +117,7 @@ class HomeScreen extends ConsumerWidget {
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               onTap: () {
-                ref.read(pickedImgProvider.notifier).pickImageFile();
+                ref.read(pickedImgProvider.notifier).pickImageFile(ImageSource.gallery);
               },
             ),
             Divider(

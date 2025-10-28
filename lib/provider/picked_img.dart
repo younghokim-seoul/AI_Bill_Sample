@@ -9,8 +9,6 @@ import 'package:arc/arc.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:ai_bill/main.dart';
-
 
 part 'picked_img.g.dart';
 
@@ -24,9 +22,9 @@ class PickedImg extends _$PickedImg {
   /// Image picker 리소스 객체
   final ImagePicker _picker = ImagePicker();
 
-  Future<void> pickImageFile() async {
+  Future<void> pickImageFile(ImageSource mode) async {
     try {
-      final imageSource = await _picker.pickImage(source: ImageSource.gallery);
+      final imageSource = await _picker.pickImage(source: mode);
       if (imageSource != null) {
         state = File(imageSource.path);
       }
@@ -53,6 +51,5 @@ class PickedImg extends _$PickedImg {
       }
     }
   }
-
 }
 
