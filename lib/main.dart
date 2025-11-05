@@ -3,12 +3,14 @@ import 'dart:developer';
 import 'package:ai_bill/environment.dart';
 import 'package:ai_bill/feature/home/home_screen.dart';
 import 'package:arc/arc.dart';
+import 'package:camera/camera.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:dart_openai/dart_openai.dart' as forWhisper;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 const Color primaryColor = Color(0xFF1173d4);
 const Color backgroundLight = Color(0xFFF6F7F8);
@@ -19,6 +21,7 @@ const Color textMutedLight = Color(0xFF475569);
 const Color textMutedDark = Color(0xFF94A3B8);
 
 final GlobalKey<NavigatorState> rootNavigatorKey = Arc().navigatorKey;
+List<CameraDescription> cameras = [];
 
 void main() async {
   await setup();
@@ -30,7 +33,15 @@ Future<void> setup() async {
 
   await dotenv.load(fileName: Environment.instance.dotFileName);
 
-  log("openApiKey => " + Environment.instance.openApiKey);
+  log("openApiKey => ${Environment.instance.openApiKey}");
+
+  await Permission.camera.request();
+
+  try {
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    log('Error initializing cameras: ${e.code}, ${e.description}');
+  }
 
   OpenAI.instance.build(
     token: Environment.instance.openApiKey,

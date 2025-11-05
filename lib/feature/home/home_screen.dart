@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ai_bill/feature/camera/camera_screen.dart';
 import 'package:ai_bill/feature/confirmation/confirmation_screen.dart';
 import 'package:ai_bill/main.dart';
 import 'package:ai_bill/provider/picked_img.dart';
@@ -50,7 +51,8 @@ class HomeScreen extends ConsumerWidget {
                 height: 160,
                 child: ElevatedButton(
                   onPressed: () {
-                    onShowOptionBtnTapped(ref);
+                    // onShowOptionBtnTapped(ref);
+                    Arc.push(CameraScreen());
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),

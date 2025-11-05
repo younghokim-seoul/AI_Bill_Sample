@@ -7,7 +7,7 @@ part of 'analysis_screen_viewmodel.dart';
 // **************************************************************************
 
 String _$analysisScreenViewModelHash() =>
-    r'721d18bbcc567639c0cd6978346ffa457044a321';
+    r'a89e5594f3e9957b966abb00822f97078d2a82a8';
 
 /// See also [AnalysisScreenViewModel].
 @ProviderFor(AnalysisScreenViewModel)

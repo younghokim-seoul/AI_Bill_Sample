@@ -6,7 +6,7 @@ part of 'picked_img.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$pickedImgHash() => r'8ec237db9d6835b98f31027ea83ecce6e921a520';
+String _$pickedImgHash() => r'4b085f8cea7bd8350e76a108454318df0c3b441f';
 
 /// See also [PickedImg].
 @ProviderFor(PickedImg)
