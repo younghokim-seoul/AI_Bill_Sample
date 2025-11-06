@@ -49,7 +49,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   void _onDetection(YoloResult result) async {
-    log('Detection result: ${result}');
+    log('Detection result: $result');
     if (!result.detected || _isAnalyzing) return;
     _isAnalyzing = true;
 

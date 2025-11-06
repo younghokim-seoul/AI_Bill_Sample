@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ai_bill/environment.dart';
 import 'package:ai_bill/feature/home/home_screen.dart';
+import 'package:ai_bill/util/tts_service.dart';
 import 'package:arc/arc.dart';
 import 'package:camera/camera.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
@@ -42,6 +43,9 @@ Future<void> setup() async {
   } on CameraException catch (e) {
     log('Error initializing cameras: ${e.code}, ${e.description}');
   }
+
+
+  await TtsService.initialize();
 
   OpenAI.instance.build(
     token: Environment.instance.openApiKey,
