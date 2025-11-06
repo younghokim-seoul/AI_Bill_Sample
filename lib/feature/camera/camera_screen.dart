@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:ai_bill/data/yolo/yolo_manager.dart';
+import 'package:ai_bill/data/yolo/yolo_result.dart';
 import 'package:ai_bill/main.dart';
-import 'package:ai_bill/util/yolo/yolo_manager.dart';
-import 'package:ai_bill/util/yolo/yolo_result.dart';
 import 'package:arc/arc.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +11,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
 class CameraScreen extends ConsumerStatefulWidget {
-
-
   const CameraScreen({super.key});
 
   @override
@@ -36,7 +34,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   Future<void> _init() async {
     await _manager.initialize();
     await _initCamera();
-    // _subscription = _manager.detectionStream.listen(_onDetection);
+    _subscription = _manager.detectionStream.listen(_onDetection);
     _startProcessing();
   }
 
@@ -48,6 +46,15 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
         await _manager.processFrame(image, _controller!);
       }
     });
+  }
+
+  void _onDetection(YoloResult result) async {
+    log('Detection result: ${result}');
+    if (!result.detected || _isAnalyzing) return;
+    _isAnalyzing = true;
+
+    await Future.delayed(const Duration(seconds: 3));
+    _isAnalyzing = false;
   }
 
   Future<void> _initCamera() async {
@@ -83,6 +90,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   void dispose() {
     _subscription?.cancel();
     _controller?.dispose();
+    _manager.dispose();
     super.dispose();
   }
 
@@ -114,11 +122,6 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   Widget _buildCamera() {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        CameraPreview(_controller!)
-      ],
-    );
+    return Stack(fit: StackFit.expand, children: [CameraPreview(_controller!)]);
   }
 }

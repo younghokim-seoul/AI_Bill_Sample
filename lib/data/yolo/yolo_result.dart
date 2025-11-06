@@ -5,9 +5,11 @@ part 'yolo_result.freezed.dart';
 @freezed
 class YoloResult with _$YoloResult {
   const factory YoloResult({
-    final bool? detected,
-    final String? imagePath,
+    required bool detected,
+    String? base64Image,
   }) = _YoloResult;
+
+  static const empty = YoloResult(detected: false);
 
 }
 

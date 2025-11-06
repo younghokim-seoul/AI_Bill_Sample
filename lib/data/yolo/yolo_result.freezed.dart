@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$YoloResult {
-  bool? get detected => throw _privateConstructorUsedError;
-  String? get imagePath => throw _privateConstructorUsedError;
+  bool get detected => throw _privateConstructorUsedError;
+  String? get base64Image => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $YoloResultCopyWith<YoloResult> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $YoloResultCopyWith<$Res> {
           YoloResult value, $Res Function(YoloResult) then) =
       _$YoloResultCopyWithImpl<$Res, YoloResult>;
   @useResult
-  $Res call({bool? detected, String? imagePath});
+  $Res call({bool detected, String? base64Image});
 }
 
 /// @nodoc
@@ -46,17 +46,17 @@ class _$YoloResultCopyWithImpl<$Res, $Val extends YoloResult>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? detected = freezed,
-    Object? imagePath = freezed,
+    Object? detected = null,
+    Object? base64Image = freezed,
   }) {
     return _then(_value.copyWith(
-      detected: freezed == detected
+      detected: null == detected
           ? _value.detected
           : detected // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      imagePath: freezed == imagePath
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
+              as bool,
+      base64Image: freezed == base64Image
+          ? _value.base64Image
+          : base64Image // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -70,7 +70,7 @@ abstract class _$$YoloResultImplCopyWith<$Res>
       __$$YoloResultImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool? detected, String? imagePath});
+  $Res call({bool detected, String? base64Image});
 }
 
 /// @nodoc
@@ -84,17 +84,17 @@ class __$$YoloResultImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? detected = freezed,
-    Object? imagePath = freezed,
+    Object? detected = null,
+    Object? base64Image = freezed,
   }) {
     return _then(_$YoloResultImpl(
-      detected: freezed == detected
+      detected: null == detected
           ? _value.detected
           : detected // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      imagePath: freezed == imagePath
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
+              as bool,
+      base64Image: freezed == base64Image
+          ? _value.base64Image
+          : base64Image // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -103,16 +103,16 @@ class __$$YoloResultImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$YoloResultImpl implements _YoloResult {
-  const _$YoloResultImpl({this.detected, this.imagePath});
+  const _$YoloResultImpl({required this.detected, this.base64Image});
 
   @override
-  final bool? detected;
+  final bool detected;
   @override
-  final String? imagePath;
+  final String? base64Image;
 
   @override
   String toString() {
-    return 'YoloResult(detected: $detected, imagePath: $imagePath)';
+    return 'YoloResult(detected: $detected, base64Image: $base64Image)';
   }
 
   @override
@@ -122,12 +122,12 @@ class _$YoloResultImpl implements _YoloResult {
             other is _$YoloResultImpl &&
             (identical(other.detected, detected) ||
                 other.detected == detected) &&
-            (identical(other.imagePath, imagePath) ||
-                other.imagePath == imagePath));
+            (identical(other.base64Image, base64Image) ||
+                other.base64Image == base64Image));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, detected, imagePath);
+  int get hashCode => Object.hash(runtimeType, detected, base64Image);
 
   @JsonKey(ignore: true)
   @override
@@ -137,13 +137,14 @@ class _$YoloResultImpl implements _YoloResult {
 }
 
 abstract class _YoloResult implements YoloResult {
-  const factory _YoloResult({final bool? detected, final String? imagePath}) =
-      _$YoloResultImpl;
+  const factory _YoloResult(
+      {required final bool detected,
+      final String? base64Image}) = _$YoloResultImpl;
 
   @override
-  bool? get detected;
+  bool get detected;
   @override
-  String? get imagePath;
+  String? get base64Image;
   @override
   @JsonKey(ignore: true)
   _$$YoloResultImplCopyWith<_$YoloResultImpl> get copyWith =>
