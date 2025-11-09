@@ -92,10 +92,8 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
     _isAnalyzing = true;
 
     try {
-      unawaited(TtsService.speak("사물이 감지 되었습니다. 잠시만 기다려 주세요."));
 
       await _stopProcessing();
-
 
       stillFile = await _captureStill();
 
@@ -191,7 +189,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
           IconButton(
             icon: Icon(Icons.close),
             onPressed: () {
-              Arc.pushNamedAndRemoveUntil("/");
+              Arc.pop();
             },
           ),
           Gap(8),

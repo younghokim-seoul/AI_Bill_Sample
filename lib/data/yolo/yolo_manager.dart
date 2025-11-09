@@ -31,13 +31,6 @@ Future<void> _yoloIsolateEntry(List<dynamic> message) async {
 }
 
 class YoloManager {
-  // static final YoloManager _instance = YoloManager._internal();
-  //
-  // factory YoloManager() => _instance;
-  //
-  // YoloManager._internal();
-
-  // Isolate 통신용
   Isolate? _isolate;
   SendPort? _toIsolateSendPort;
   ReceivePort? _fromIsolateReceivePort;
@@ -73,7 +66,6 @@ class YoloManager {
         initPackage,
       ]);
 
-      // Isolate로부터 메시지 수신 대기
       _fromIsolateReceivePort!.listen(_onIsolateMessage);
 
       _isInit = true;

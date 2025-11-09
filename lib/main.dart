@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:ai_bill/environment.dart';
+import 'package:ai_bill/feature/camera/camera_screen.dart';
 import 'package:ai_bill/feature/home/home_screen.dart';
 import 'package:ai_bill/util/tts_service.dart';
 import 'package:arc/arc.dart';
@@ -104,7 +105,7 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       themeMode: ThemeMode.light,
-      home: const HomeScreen(),
+      home: const CameraScreen(),
       builder: EasyLoading.init(),
     );
   }
