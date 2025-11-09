@@ -38,6 +38,8 @@ dependencies:
   flutter_dotenv: ^5.0.2 # dotnev
   dart_openai: ^5.1.0
 
+  flutter_easyloading: ^3.0.5 # 로딩 UI 처리 관련
+
   camera: ^0.11.3
   tflite_flutter: ^0.12.1
   image: ^4.5.4

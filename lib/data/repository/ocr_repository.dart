@@ -58,6 +58,7 @@ class OcrRepository {
     }
   }
 
+
   Future<GptResponse> getSummaryAi(String script) async {
     final systemMessage = OpenAIChatCompletionChoiceMessageModel(
       content: [

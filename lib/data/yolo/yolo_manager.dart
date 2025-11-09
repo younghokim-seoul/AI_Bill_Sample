@@ -31,11 +31,11 @@ Future<void> _yoloIsolateEntry(List<dynamic> message) async {
 }
 
 class YoloManager {
-  static final YoloManager _instance = YoloManager._internal();
-
-  factory YoloManager() => _instance;
-
-  YoloManager._internal();
+  // static final YoloManager _instance = YoloManager._internal();
+  //
+  // factory YoloManager() => _instance;
+  //
+  // YoloManager._internal();
 
   // Isolate 통신용
   Isolate? _isolate;

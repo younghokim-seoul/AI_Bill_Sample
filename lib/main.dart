@@ -9,6 +9,7 @@ import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:dart_openai/dart_openai.dart' as forWhisper;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -43,7 +44,6 @@ Future<void> setup() async {
   } on CameraException catch (e) {
     log('Error initializing cameras: ${e.code}, ${e.description}');
   }
-
 
   await TtsService.initialize();
 
@@ -105,6 +105,7 @@ class MyApp extends ConsumerWidget {
       theme: lightTheme,
       themeMode: ThemeMode.light,
       home: const HomeScreen(),
+      builder: EasyLoading.init(),
     );
   }
 }
